@@ -23,7 +23,6 @@ export function ToySort({ sortBy, onSetSort }) {
         <option value="">Sort by</option>
         <option value="name">Name</option>
         <option value="price">Price</option>
-        <option value="createdAt">Date</option>
       </select>
       <label>
         <input

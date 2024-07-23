@@ -37,7 +37,7 @@ function query(filterBy = {}, sortBy = {}) {
 
 
             }
-            return filteredToys
+            return Promise.resolve(filteredToys)
         })
 }
 
@@ -98,7 +98,6 @@ function getDefaultFilter() {
         txt: '',
         inStock: null,
         labels: [],
-        pageIdx: 0,
         maxPrice: ''
     }
 }

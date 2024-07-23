@@ -1,4 +1,5 @@
 import { toyService } from "../../services/toy.service.js"
+import { toyServiceRe } from "../../services/toy.service.remote.js"
 
 //* toys
 export const SET_TOYS = 'SET_TOYS'
@@ -15,11 +16,13 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 const initialState = {
     toys: [],
     isLoading: false,
-    filterBy: toyService.getDefaultFilter(),
+    filterBy: toyServiceRe.getDefaultFilter(),
+    sortBy: toyServiceRe.getDefaultSort(),
     lastToys: []
 }
 
 export function toyReducer(state = initialState, action = {}) {
+
     switch (action.type) {
         //* TOYs
         case SET_TOYS:

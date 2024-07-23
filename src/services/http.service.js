@@ -1,5 +1,5 @@
 import Axios from 'axios'
-
+//const BASE_URL = '//localhost:3030/api/'
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'
@@ -24,22 +24,25 @@ export const httpService = {
 }
 
 function ajax(endpoint, method = 'GET', data = null) {
+    console.log(endpoint, data, BASE_URL);
+    var urll = `${BASE_URL}${endpoint}`
+    console.log(urll);
     return axios({
         url: `${BASE_URL}${endpoint}`,
         method,
         data,
         params: (method === 'GET') ? data : null
     })
-    .then(res => res.data)
-    .catch(err => {
-        console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data:`, data)
-        console.dir(err)
-        if (err.response && err.response.status === 401) {
-            sessionStorage.clear()
-            window.location.assign('/')
-        }
-        throw err
-    })
+        .then(res => res.data)
+        .catch(err => {
+            console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data:`, data)
+            console.dir(err)
+            if (err.response && err.response.status === 401) {
+                sessionStorage.clear()
+                window.location.assign('/')
+            }
+            throw err
+        })
 }
 
 

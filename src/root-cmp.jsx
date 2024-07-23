@@ -12,6 +12,7 @@ import { ToyIndex } from './pages/ToyIndex.jsx'
 import { store } from './store/store.js'
 import { ToyEdit } from './pages/ToyEdit.jsx'
 import { ToyDetails } from './pages/ToyDetails.jsx'
+import { ToyDashboard } from './pages/ToyDashboard.jsx'
 
 import { Provider } from 'react-redux'
 

@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { toyService } from "../services/toy.service.js"
+import { toyServiceRe } from "../services/toy.service.remote.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { saveToy } from "../store/actions/toy.actions.js"
 import { useEffect, useState } from "react"
@@ -14,7 +15,7 @@ export function ToyEdit() {
     }, [])
 
     function loadToy() {
-        toyService.getById(toyId)
+        toyServiceRe.getById(toyId)
             .then(toy => setToyToEdit(toy))
             .catch(err => {
                 console.log('Had issues in Toy edit', err)
@@ -55,7 +56,7 @@ export function ToyEdit() {
                     value={toyToEdit.price}
                     onChange={handleChange}
                 />
-                <label htmlFor="price">name : </label>
+                <label htmlFor="name">name : </label>
                 <input type="text"
                     name="name"
                     id="name"

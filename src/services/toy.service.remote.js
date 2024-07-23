@@ -3,17 +3,21 @@ import { httpService } from './http.service.js'
 
 const BASE_URL = 'toy/'
 
-export const toyService = {
+export const toyServiceRe = {
     query,
     getById,
     save,
     remove,
     getEmptyToy,
-    getDefaultFilter
+    getDefaultFilter,
+    getDefaultSort,
+    getToyLabels,
+    getToyLabelCounts,
 }
 
-function query(filterBy = {}) {
-    return httpService.get(BASE_URL, filterBy)
+function query(filterBy = {}, sortBy) {
+    console.log(sortBy);
+    return httpService.get(BASE_URL, { filterBy, sortBy })
     // if (!filterBy.txt) filterBy.txt = ''
     // if (!filterBy.maxPrice) filterBy.maxPrice = Infinity
     // const regExp = new RegExp(filterBy.txt, 'i')
@@ -42,16 +46,47 @@ function save(toy) {
     }
 }
 
-function getEmptyToy() {
+
+
+
+
+function getDefaultFilter() {
     return {
-        price: utilService.getRandomIntInclusive(1000, 9000),
-        speed: utilService.getRandomIntInclusive(75, 200),
+        txt: '',
+        inStock: null,
+        labels: [],
+        maxPrice: ''
     }
 }
 
-function getDefaultFilter() {
-    return { txt: '', maxPrice: '' }
+function getDefaultSort() {
+    return { type: '', desc: false }
+}
+
+function getEmptyToy() {
+    return {
+        name: '',
+        price: '',
+        labels: _getRandomLabels(),
+    }
 }
 
 
+function getToyLabels() {
+    return httpService.get(BASE_URL + 'labels')
+}
 
+
+function getToyLabelCounts() {
+    return httpService.get(BASE_URL + 'labels/count')
+}
+
+function _getRandomLabels() {
+    const labelsCopy = [...labels]
+    const randomLabels = []
+    for (let i = 0; i < 2; i++) {
+        const randomIdx = Math.floor(Math.random() * labelsCopy.length)
+        randomLabels.push(labelsCopy.splice(randomIdx, 1)[0])
+    }
+    return randomLabels
+}

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 export function ToyList({ toys, onRemoveToy }) {
     console.log('Rendering List')
     return (
-        <ul className="Toy-list">
+        <ul className="toy-list">
             {toys.map(toy =>
-                <li className="Toy-preview" key={toy._id}>
+                <li className="toy-preview" key={toy._id}>
                     <ToyPreview toy={toy} />
                     <div>
                         <button onClick={() => onRemoveToy(toy._id)}>x</button>
